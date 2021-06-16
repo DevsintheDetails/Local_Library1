@@ -1,6 +1,7 @@
 function getTotalBooksCount(books) {
   return books.length;
 }
+/* Used .length to return the total books array.*/
 
 function getTotalAccountsCount(accounts) {
   return accounts.length;
@@ -9,6 +10,7 @@ function getTotalAccountsCount(accounts) {
 function getBooksBorrowedCount(books) {
   return books.filter((book) => !book.borrows[0].returned).length
 }
+/* Used filter method to filter to create new array with books not borrowed length.*/
 
 function getMostCommonGenres(books) {
   let genres = [];
@@ -25,6 +27,8 @@ function getMostCommonGenres(books) {
   genres.sort((a, b) => b.count - a.count);
   return genres.slice(0, 5);
 } 
+/* Used .forEach to execute function once for each element created new variable that 
+holds the returned index of the first element in genre that satisfies the function .name === .genre.*/
 
 function getMostPopularBooks(books) {
   let popularityBooks = [];

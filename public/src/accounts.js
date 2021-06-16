@@ -2,11 +2,12 @@ function findAccountById(accounts, id) {
   let found = accounts.find((account)=> account.id === id)
   return (!found) ? null: found;
 }
+/* Used find method to return the value of the first element in the array that satisfies the functon*/
 
 function sortAccountsByLastName(accounts) {
   return accounts.sort((a, b) => a.name.last.toLowerCase() > b.name.last.toLowerCase() ? 1:-1);
 }
-
+/* Used sort method to sort accounts by last name.*/
 
 function getTotalNumberOfBorrows(account, books) {
   let counter = 0;

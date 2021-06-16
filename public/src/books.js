@@ -2,6 +2,7 @@ function findAuthorById(authors, id) {
   let found = authors.find((author) => author.id === id)
   return (!found) ? null: found;
 }
+/* Used find method to return value of the first element satified by the function which uses Id to find author.*/
 
 function findBookById(books, id) {
   let found = books.find((book) => book.id === id)
