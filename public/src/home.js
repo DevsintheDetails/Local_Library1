@@ -12,6 +12,20 @@ function getBooksBorrowedCount(books) {
 }
 /* Used filter method to filter to create new array with books not borrowed length.*/
 
+// helper function that sorts objects
+function _sortObj(obj) {
+  const keys = Object.keys(obj);
+  return keys.sort((keyA, keyB) => {
+    if (obj[keyA] > obj[keyB]) {
+      return -1;
+    } else if (obj[keyB] > obj[keyA]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
 function getMostCommonGenres(books) {
   let genres = [];
   books.forEach((book) => {
@@ -31,14 +45,16 @@ function getMostCommonGenres(books) {
 holds the returned index of the first element in genre that satisfies the function .name === .genre.*/
 
 function getMostPopularBooks(books) {
-  let popularityBooks = [];
-    books.forEach((book) => {
-      popularityBooks.push({"name": book.title, "count": book.borrows.length});
-    });
-  popularityBooks.sort((a, b) => b.count - a.count);
- 
-  let numberItems=5;
-  return popularityBooks.slice(0, numberItems);    
+  let popularityBooks = books.reduce((acc, { id, borrows }) => {
+    acc[id] = borrows.length;
+    return acc;
+    }, {});
+  // popularityBooks.sort((a, b) => b.count - a.count);
+  let sorted = _sortObj(popularityBooks)
+  return sorted.map((id) => {
+    const { title: name } = books.find(({ id: bookId }) => bookId === id);
+    return { name, count: popularityBooks[id]}
+  }).slice(0, 5);    
 }
 
 function getMostPopularAuthors(books, authors) {
